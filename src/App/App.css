@@ -16,3 +16,7 @@
   height: 98%;
   cursor: pointer;
 }
+
+.value {
+  font-size: 50px;
+}
