@@ -4,7 +4,6 @@ import "./App.css";
 function App() {
   const [moves, setMoves] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
-  const [status, setStatus] = useState("");
 
   const currentMoveArr = moves[currentMove];
 
@@ -21,7 +20,10 @@ function App() {
     const { currentMove, currentMoveArr } = props;
 
     const onClickPlayHandler = (i) => {
-      const newMoveArr = currentMoveArr;
+      if (winnerCombinations(currentMoveArr) || currentMoveArr[i]) {
+        return;
+      }
+      const newMoveArr = currentMoveArr.slice();
       if (currentMove % 2 === 0) {
         newMoveArr[i] = "X";
       } else {
@@ -34,10 +36,13 @@ function App() {
     };
 
     const winner = winnerCombinations(currentMoveArr);
+    let status = "";
     if (winner) {
-      setStatus("Winner is " + winner);
+      status = "Winner is " + winner;
+    } else if (!winner && currentMove === 9) {
+      status = "It's a Draw";
     } else {
-      setStatus("Next player is " + (currentMove % 2 === 0 ? "X" : "O"));
+      status = "Next player is " + (currentMove % 2 === 0 ? "X" : "O");
     }
 
     return (
@@ -58,10 +63,22 @@ function App() {
     );
   };
 
+  const onClickReset = () => {
+    setCurrentMove(0);
+    setMoves([Array(9).fill(null)]);
+  };
+
+  console.log("moves", moves);
+
   return (
     <div>
       <h1 className="title">Tic Tac Toe </h1>
       <Board currentMove={currentMove} currentMoveArr={currentMoveArr} />
+      <div className="resetButton">
+        <button className="btn" onClick={onClickReset}>
+          Reset
+        </button>
+      </div>
     </div>
   );
 }

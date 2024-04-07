@@ -1,6 +1,7 @@
 .title,
 .status {
   text-align: center;
+  color: #ffc575;
 }
 
 .board {
@@ -16,12 +17,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #8e9bb0;
+  background-color: #171a1f;;
   width: 98%;
   height: 98%;
   cursor: pointer;
+  color: #ffc575;
 }
 
 .value {
   font-size: 50px;
+}
+
+.resetButton {
+  text-align: center;
+}
+
+.resetButton .btn {
+  background: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    color: #ffc575;
 }
